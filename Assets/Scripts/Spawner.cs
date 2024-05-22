@@ -18,9 +18,9 @@ public class Spawner : MonoBehaviour
     {
         timeSinceSpawned = new List<float>();
         timeSinceSpawned.Add(100);
-        timeSinceSpawned.Add(-22);
-        timeSinceSpawned.Add(-42);
-        timeSinceSpawned.Add(-42);
+        timeSinceSpawned.Add(-20);
+        timeSinceSpawned.Add(-30);
+        timeSinceSpawned.Add(-30);
 
         /*for (int i = 0; i < prefabsToSpawn.Count; i++)
         {
@@ -41,9 +41,7 @@ public class Spawner : MonoBehaviour
         }
 
         for (int i = 0; i < timeSinceSpawned.Count; i++)
-        {
             timeSinceSpawned[i] += Time.deltaTime;
-        }
     }
     private Bounds GetCameraBounds(Camera cam)
     {
@@ -92,5 +90,14 @@ public class Spawner : MonoBehaviour
         }
 
         Instantiate(prefab, spawnPosition, Quaternion.identity, parent);
+    }
+    public GameObject SpawnCube(GameObject prefab, Transform parent)
+    {
+        Vector3 spawnPosition = new Vector3(
+                    Random.Range(bounds.min.x, bounds.max.x),
+                    bounds.max.y + prefab.GetComponent<SpriteRenderer>().bounds.size.y,
+                    this.transform.position.z);
+
+        return Instantiate(prefab, spawnPosition, Quaternion.identity, parent);
     }
 }

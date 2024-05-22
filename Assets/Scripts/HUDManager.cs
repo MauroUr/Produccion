@@ -14,10 +14,12 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private float _loseLifeDelay;
     private float _lastLifeLosed = 0;
 
+
     private void Start()
     {
         _planetLife.fillAmount = _pLifeAmount;
         _tpAnimator = GetComponentInChildren<Animator>();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().OnTPUsed.AddListener(ResetTP);
     }
     private void Update()
     {
@@ -26,10 +28,10 @@ public class HUDManager : MonoBehaviour
 
         _lastLifeLosed += Time.deltaTime;
     }
-    public void UpdateHUD(float nitro, float shipLife)
+    public void UpdateHUD(float[] status)
     {
-        _nitro.fillAmount = nitro / 100;
-        _shipLife.fillAmount = shipLife / 100;
+        _nitro.fillAmount = status[0] / 100;
+        _shipLife.fillAmount = status[1] / 100;
         _planetLife.fillAmount = _pLifeAmount / 100;
 
         if (_pLifeAmount >= 100)

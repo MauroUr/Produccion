@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
     private const int MAX_CUBES = 70;
     [SerializeField] private GameObject cube;
-    private List<Color> cubeColors = new List<Color>() { Color.red, Color.blue, Color.yellow, Color.magenta };
+    private List<Color> cubeColors = new List<Color>() { Color.red, Color.cyan, Color.yellow, Color.magenta };
 
     [SerializeField] private GameObject WorldBounds;
     private Bounds bounds;
+
+    [SerializeField] private GameObject Spawner;
+
+    //public bool isInLevel3 = false;
 
     void Start()
     {
@@ -41,6 +44,13 @@ public class CubeSpawner : MonoBehaviour
             Random.Range(bounds.min.y, bounds.max.y),
             Random.Range(bounds.min.z, bounds.max.z)), this.transform.rotation);
             instance.GetComponent<SpriteRenderer>().color = color;
+
+            /*if (isInLevel3)
+            {
+                Level3Cube script = instance.GetComponent<Level3Cube>();
+                script.enabled = true;
+                script.StartMoving();
+            }*/
         }
     }
 }

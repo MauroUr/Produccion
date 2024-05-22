@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    public UnityEvent OnDeath;
+    public UnityEvent OnPixelPicked;
+    public UnityEvent OnTPUsed;
     [SerializeField] private float BASE_SPEED;
     private int life = 100;
 
     [SerializeField] private float rotationSpeed = 5f;
     private float speed;
     [SerializeField] private CubeSpawner cubeSpawner;
-    [SerializeField] private HUDManager hudManager;
     [SerializeField] private GameObject map;
     private Rigidbody2D rb;
-    private Animator animator;
-    private List<Color> allColors = new List<Color>() { Color.red, Color.blue, Color.yellow, Color.magenta };
+    private List<Color> allColors = new List<Color>() { Color.red, Color.cyan, Color.yellow, Color.magenta };
 
     private float nitroFuel = 100f;
     private bool canUseTp = true;
+
+    //public bool level2 = false;
 
     private void Awake()
     {
@@ -30,7 +32,9 @@ public class Player : MonoBehaviour
         this.ChangeColor(allColors);
         speed = BASE_SPEED;
         rb = this.GetComponent<Rigidbody2D>();
-        animator = this.GetComponent<Animator>();
+        OnDeath = new UnityEvent();
+        OnPixelPicked = new UnityEvent();
+        OnTPUsed = new UnityEvent();
     }
 
     private void FixedUpdate()
@@ -40,22 +44,15 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.X) && canUseTp)
-        {
             this.Teletransport();
-            canUseTp = false;
-        }
         
         this.IsUsingNitro();
-        hudManager.UpdateHUD(this.nitroFuel, this.life);
         
         if (life <= 0)
-        {
-            Destroy(gameObject);
-            Time.timeScale = 0;
-        }
+            //OnDeath.Invoke();
+            GameController.Instance.GameOver();
     }
-    public float GetPlayerBSpeed() { return BASE_SPEED; }
-    public void TPIsReady() { canUseTp = true; }
+
 
     private void MoveToCursor()
     {
@@ -70,16 +67,6 @@ public class Player : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle-90);
-
-        if (targetRotation.z < transform.rotation.z)
-            animator.SetBool("Turning_right", true);
-        else if (targetRotation.z > transform.rotation.z)
-            animator.SetBool("Turning_left", true);
-        else
-        {
-            animator.SetBool("Turning_right", false);
-            animator.SetBool("Turning_left", false);
-        }
 
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
@@ -98,7 +85,8 @@ public class Player : MonoBehaviour
 
         transform.position = this.map.transform.TransformPoint(oppositeLocalPosition);
 
-        hudManager.ResetTP();
+        canUseTp = false;
+        OnTPUsed.Invoke();
     }
 
     private void IsUsingNitro()
@@ -122,6 +110,14 @@ public class Player : MonoBehaviour
             nitroFuel += 0.25f;
     }
 
+    public float[] GetPlayerStatus()
+    {
+        float[] status = { this.nitroFuel, this.life };
+        return status;
+    }
+
+    public void TPIsReady() { canUseTp = true; }
+    public float GetPlayerBSpeed() { return BASE_SPEED; }
     public void TakeDamage(int amount)
     {
         life -= amount;
@@ -134,16 +130,25 @@ public class Player : MonoBehaviour
 
             if (cubeColor == this.gameObject.GetComponent<SpriteRenderer>().color)
             {
-                cubeSpawner.SpawnCube(cubeColor);
-
                 List<Color> nextColorList = new List<Color>(allColors);
                 nextColorList.Remove(cubeColor);
-                ChangeColor(nextColorList);
+
+                //if (!level2)
+                //{
+                    ChangeColor(nextColorList);
+                    cubeSpawner.SpawnCube(cubeColor);
+                //}
 
                 Destroy(collision.gameObject);
-                hudManager.RecoverPlanetLife(2);
+                GameController.Instance.PixelRetrieved();//OnPixelPicked.Invoke();
             }
         }
+
+        /*if (collision != null && level2 && collision.gameObject.layer == 7)
+        {
+            List<Color> colorDePortal = new List<Color>();
+            colorDePortal.Add(collision.gameObject.GetComponent<SpriteRenderer>().color);
+            ChangeColor(colorDePortal);
+        }*/
     }
 }
-

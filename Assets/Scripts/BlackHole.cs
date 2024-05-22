@@ -5,12 +5,12 @@ using UnityEngine;
 public class BlackHole : MonoBehaviour
 {
 
-    private float gravitationalForce = 2f;
+    private float gravitationalForce = 9000f;
     private float timeSinceSpawned = 0;
 
     void Update()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, 5f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, 7.5f);
 
         foreach (Collider2D collider in colliders) { 
             if(collider.gameObject.GetComponent<Rigidbody2D>() != null)
@@ -25,8 +25,11 @@ public class BlackHole : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer != 10)
+        if (collision.gameObject.layer != 10)
             Destroy(collision.gameObject);
+        else
+            collision.gameObject.GetComponent<Player>().TakeDamage(100);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
