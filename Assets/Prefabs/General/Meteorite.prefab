@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4271306806878055249}
   - component: {fileID: 6867699790289901535}
   - component: {fileID: 1312038456530031497}
-  - component: {fileID: 1961710057627200508}
+  - component: {fileID: 5892988340384215530}
   m_Layer: 0
   m_Name: Meteorite
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2826998077561095061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.018769465, y: -0.07161978, z: 0}
+  m_LocalPosition: {x: 0.023111816, y: -0.07202646, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: -1992528375
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 703637360, guid: c8a55d126fd9c9e479e5da3d8ced7ca1, type: 3}
+  m_Sprite: {fileID: 1015001118, guid: ea2e18f27ea755144a07a620d2d0921d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.02, y: 0.81}
+  m_Size: {x: 1.15, y: 0.58}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 2826998077561095061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f8163cf6dc807ef4b9a3c29022abb5b4, type: 2}
+  m_Controller: {fileID: 9100000, guid: ed6ffcdd5f6f2584ba722181846f1f8f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.5
-  m_LinearDrag: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -135,7 +135,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &1312038456530031497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b9440c8deebc84ab940c45b1950f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &1961710057627200508
+--- !u!58 &5892988340384215530
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,9 +177,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21632141, y: -0.13424486}
+  m_Offset: {x: 0.28485724, y: -0.005789876}
   serializedVersion: 2
-  m_Radius: 0.25311598
+  m_Radius: 0.23192485

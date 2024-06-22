@@ -121,14 +121,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5783455634140432502}
-        m_TargetAssemblyTypeName: ScreenButtons, Assembly-CSharp
-        m_MethodName: RestartButton
+      - m_Target: {fileID: 1344138571210037163}
+        m_TargetAssemblyTypeName: DefWinScreen, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -341,10 +341,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 8090062816039836703}
   - component: {fileID: 8428579122393128370}
   - component: {fileID: 8860475526434559662}
-  - component: {fileID: 5783455634140432502}
+  - component: {fileID: 1344138571210037163}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5783455634140432502
+--- !u!114 &1344138571210037163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,9 +591,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4358375970959859931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64842751fc5cb894b9b5a77c2d2887da, type: 3}
+  m_Script: {fileID: 11500000, guid: f3b7c8fdf27c8e8409de0d4c1edab98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  options: {fileID: 0}
 --- !u!1 &5762284281559347787
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,9 +716,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5783455634140432502}
-        m_TargetAssemblyTypeName: ScreenButtons, Assembly-CSharp
-        m_MethodName: MainMenu
+      - m_Target: {fileID: 1344138571210037163}
+        m_TargetAssemblyTypeName: DefWinScreen, Assembly-CSharp
+        m_MethodName: MainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
