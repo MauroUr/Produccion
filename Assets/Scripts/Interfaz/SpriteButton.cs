@@ -52,6 +52,10 @@ public class SpriteButton : MonoBehaviour
                 levelController.Back(); break;
             case "MainMenu":
                 optionsMenu.MainMenu(); break;
+            case "Controls":
+                optionsMenu.ControlPanel(); break;
+            case "Credits":
+                menu.Credits(); break;
         }
     }
 }

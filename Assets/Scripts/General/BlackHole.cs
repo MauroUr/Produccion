@@ -33,7 +33,7 @@ public class BlackHole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != 10)
+        if (collision.gameObject.layer != 10 && collision.gameObject.tag != "Laser")
             Destroy(collision.gameObject);
     }
 }

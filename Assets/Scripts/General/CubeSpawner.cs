@@ -38,6 +38,7 @@ public class CubeSpawner : MonoBehaviour
             this.transform);
             instance.GetComponentInChildren<SpriteRenderer>().color = cubeColors[colorChanger];
             colorChanger++;
+            instance.GetComponent<Cube>().spawner = this;
 
             if (isInLevel3)
             {
@@ -58,6 +59,7 @@ public class CubeSpawner : MonoBehaviour
             Random.Range(bounds.min.y, bounds.max.y),
             Random.Range(bounds.min.z, bounds.max.z)), this.transform.rotation);
             instance.GetComponent<SpriteRenderer>().color = color;
+            instance.GetComponent<Cube>().spawner = this;
 
             if (isInLevel3)
             {

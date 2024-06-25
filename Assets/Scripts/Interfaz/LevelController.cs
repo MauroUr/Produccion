@@ -12,30 +12,35 @@ public class LevelController : MonoBehaviour
     private int progress = 0;
     [SerializeField] private GameObject background;
     [SerializeField] private GameObject loadingScreen;
-    //[SerializeField] private List<Button> buttons;
+    [SerializeField] private List<CircleCollider2D> levels;
     public static LevelController Instance;
     void Start()
     {
         if (Instance == null)
+        {
             Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
         else
             Destroy(this);
 
+        if (GameObject.Find("8-Bit Odyssey") == null)
+            AudioManager.instance.PlayLoop("8-Bit Odyssey");
         progress = SaveSystem.LoadProgress();
 
-        //if (progress > 0 && progress < 4)
-            //UnlockLevels();
+        if (progress > 0 && progress < 4 && levels.Count > 0)
+            UnlockLevels();
     }
 
     private void UnlockLevels()
     {
-//for (int i = 0; i < progress; i++)
-  //          buttons[i].interactable = true;
-
+        for (int i = 0; i <= progress; i++)
+            levels[i].enabled = true;
     }
 
     public void StartLevel(int level)
     {
+
         StartCoroutine(LoadSceneAsynchronously("Level " + level.ToString()));
     }
 
@@ -59,7 +64,9 @@ public class LevelController : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         background.SetActive(false);
         loadingScreen.SetActive(true);
-
+        Destroy(GameObject.Find("8-Bit Odyssey"));
+        if(AudioManager.instance != null)
+            AudioManager.instance.StopLoop();
         while (!operation.isDone)
         {
             yield return null;

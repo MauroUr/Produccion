@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<GameObject> portales;
 
     [SerializeField] private CubeSpawner cubeSpawner;
+    [SerializeField] private GameObject spawner;
     private List<Color> colors;
 
     private Player player;
@@ -83,6 +84,9 @@ public class GameController : MonoBehaviour
         if (_lastLifeLosed > _loseLifeDelay)
         {
             planetLife--;
+            if(planetLife <= 0 )
+                GameOver();
+
             _lastLifeLosed = 0;
         }
         _lastLifeLosed += Time.deltaTime;
@@ -128,14 +132,22 @@ public class GameController : MonoBehaviour
     }
     public void GameOver()
     {
-        Time.timeScale = 0;
+        isPaused = true;
+        player.enabled = false;
+        Destroy(spawner);
         gameOverScreen.SetActive(true);
     }
     private void Win()
     {
-        LevelController.Instance.CheckProgress(SceneManager.GetActiveScene().name[6] - 48);
-        Time.timeScale = 0;
-        winScreen.SetActive(true);
+        if (!isPaused)
+        {
+            LevelController.Instance.CheckProgress(SceneManager.GetActiveScene().name[6] - 48);
+            isPaused = true;
+            player.enabled = false;
+            Destroy(spawner);
+            winScreen.SetActive(true);
+            winScreen.GetComponentInChildren<DefWinScreen>().CheckScore(player.GetPlayerStatus()[1]);
+        }
     }
 
 }

@@ -11,6 +11,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown resDropdown;
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private Toggle toggle;
+    [SerializeField] private List<GameObject> panels;
 
     private OptionsData data;
 
@@ -78,6 +79,12 @@ public class OptionsMenu : MonoBehaviour
         Time.timeScale = 1.0f;
         GameController.Instance.isPaused = false;
         this.gameObject.SetActive(false);
+    }
+
+    public void ControlPanel()
+    {
+        panels[0].SetActive(!panels[0].activeSelf);
+        panels[1].SetActive(!panels[1].activeSelf);
     }
     public void QuitGame()
     {

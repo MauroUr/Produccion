@@ -11,9 +11,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject background;
     [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject music;
 
     private bool inOptionsMenu = false;
 
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
     public void PlayButton()
     {
         StartCoroutine(LoadSceneAsynchronously("LevelSelection"));
@@ -35,8 +40,14 @@ public class MainMenu : MonoBehaviour
     public void ActivateMenu()
     {
         mainMenu.SetActive(true);
+        music.SetActive(true);
+        DontDestroyOnLoad(music);
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
     private IEnumerator LoadSceneAsynchronously(string scene)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
